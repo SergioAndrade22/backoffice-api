@@ -1,0 +1,18 @@
+{
+  "name": "servicio-web",
+  "version": "1.0.0",
+  "description": "Modulo Servicio Web",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrade Colombani, Sergio David",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "pg": "^8.6.0"
+  }
+}
