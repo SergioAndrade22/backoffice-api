@@ -43,7 +43,7 @@ app.get('/menu/:id', (req, res) => {
             if (result.rows.length > 0){
                 res.status(200).json({
                     ok: true,
-                    item: result.rows,
+                    item: result.rows[0],
                 });
             }
             else {
