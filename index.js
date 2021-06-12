@@ -88,3 +88,7 @@ app.get('/menu/:id/image', (req, res) => {
         client.end();
     });
 });
+
+app.listen(process.env.PORT || 5000, () => {
+    console.log('Server status: \x1b[32m%s\x1b[0m', 'online');
+}); // specifies port to listen in and function to display a message when loaded
