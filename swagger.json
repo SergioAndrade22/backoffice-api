@@ -29,10 +29,24 @@
                     "200": {
                         "description": "Arreglo de items del menu",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Item"
+                            "type": "object",
+                            "properties": {
+                                "ok": {
+                                    "type": "boolean"
+                                },
+                                "menu": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Item"
+                                    }
+                                }
                             }
+                        }
+                    },
+                    "500" : {
+                        "description": "Ocurrió un error en el servidor",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 }
@@ -58,7 +72,27 @@
                     "200": {
                         "description": "Item identificado por id",
                         "schema": {
-                            "$ref": "#/definitions/Item"
+                            "type": "object",
+                            "properties": {
+                                "ok": {
+                                    "type": "boolean"
+                                },
+                                "item": {
+                                    "$ref": "#/definitions/Item"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se logró encontrar un item con el id suministrado",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500" : {
+                        "description": "Ocurrió un error en el servidor",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 }
@@ -84,9 +118,29 @@
                     "200": {
                         "description": "Base64 encoded image",
                         "schema": {
-                            "type": "string",
-                            "nullable": true,
-                            "format": "byte"
+                            "type": "object",
+                            "properties": {
+                                "ok": {
+                                    "type": "boolean"
+                                },
+                                "picture": {
+                                    "type": "string",
+                                    "nullable": true,
+                                    "format": "byte"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description":"No se logró encontrar un item con el id suministrado",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ocurrió un error en el servidor",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 }
@@ -120,6 +174,16 @@
                 },
                 "cost": {
                     "type": "number"
+                }
+            }
+        },
+        "ErrorResponse": {
+            "properties": {
+                "ok": {
+                    "type": "boolean"
+                },
+                "error": {
+                    "type": "string"
                 }
             }
         }
