@@ -3,6 +3,13 @@ const { getPictureQuery, getQuery, getClient } = require('./dbHandler');
 const express = require('express');
 const app = express();
 
+app.get('/', (req, res) => {
+    res.status(200).json({
+        ok: true,
+        message: "Connection stable"
+    })
+});
+
 app.get('/menu', (req, res) => {
     const client = getClient();
     client.connect();
