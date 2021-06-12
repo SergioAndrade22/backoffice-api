@@ -3,6 +3,11 @@ const { getPictureQuery, getQuery, getClient } = require('./dbHandler');
 const express = require('express');
 const app = express();
 
+const swaggerUI = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
+app.use('/api-docs',swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
 app.get('/', (req, res) => {
     res.status(200).json({
         ok: true,
@@ -57,7 +62,7 @@ app.get('/menu/:id', (req, res) => {
     });
 });
 
-app.get('/menu/:id/image', (req, res) => {
+app.get('/menu/:id/picture', (req, res) => {
     const client = getClient();
     client.connect();
     client.query(getPictureQuery(req.params.id), (error, result) => {

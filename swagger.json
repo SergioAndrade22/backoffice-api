@@ -1,0 +1,127 @@
+{
+    "swagger": "2.0",
+    "info": {
+            "version": "1.0.0",
+            "title": "FamilySize Servicio Web",
+            "description": "Servicio Web para la obtención del menú de FamilySize Restaurant",
+            "license": {
+            "name": "ISC",
+            "url": "https://opensource.org/licenses/ISC"
+        }
+    },
+    "host": "familysize-servicio-web.herokuapp.com",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Menú",
+            "description": "Obtención de los items del menú"
+        }
+    ],
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/menu": {
+            "get": {
+                "tags": ["Menú"],
+                "summary": "Get para obtener todos los items del menú",
+                "responses": {
+                    "200": {
+                        "description": "Arreglo de items del menu",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Item"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/menu/{id}": {
+            "get": {
+                "tags": ["Menú"],
+                "summary": "Get para obtener un item particular del menú",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "description": "Identificador unívoco del item"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Item identificado por id",
+                        "schema": {
+                            "$ref": "#/definitions/Item"
+                        }
+                    }
+                }
+            }
+        },
+        "/menu/{id}/picture": {
+            "get": {
+                "tags": ["Menú"],
+                "summary": "Get para obtener la imagen de un item particular del menú",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "description": "Identificador unívoco del item"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Base64 encoded image",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true,
+                            "format": "byte"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Item": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "cuisine": {
+                    "type": "string"
+                },
+                "is_vege": {
+                    "type": "boolean"
+                },
+                "is_vegan": {
+                    "type": "boolean"
+                },
+                "is_coeliac": {
+                    "type": "boolean"
+                },
+                "has_alcohol": {
+                    "type": "boolean"
+                },
+                "cost": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}
