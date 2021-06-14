@@ -102,6 +102,7 @@
             "get": {
                 "tags": ["Menú"],
                 "summary": "Get para obtener la imagen de un item particular del menú",
+                "produces": "image/jpeg",
                 "parameters": [
                     {
                         "name": "id",
@@ -116,19 +117,9 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Base64 encoded image",
+                        "description": "Imagen del menú seleccionado",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "ok": {
-                                    "type": "boolean"
-                                },
-                                "picture": {
-                                    "type": "string",
-                                    "nullable": true,
-                                    "format": "byte"
-                                }
-                            }
+                            "type": "file"
                         }
                     },
                     "404": {
