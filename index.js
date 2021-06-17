@@ -70,6 +70,7 @@ app.get('/menu/:id/picture', (req, res) => {
             if (result.rows.length > 0) {
                 const picture = result.rows[0].picture;
                 if (picture) {
+                    res.writeHead(200, {'Content-Type': 'image/jpg'});
                     res.write(picture, 'base64', (err) => {
                         console.error("Failed to write image:", err);
                     });
