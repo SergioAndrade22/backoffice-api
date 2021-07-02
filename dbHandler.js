@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { Client } = require('pg');
 
-const COLUMNS = "id, name, cuisine, is_vege, is_vegan, is_coeliac, has_alcohol, cost";
+const COLUMNS = "id, name, cuisine, is_vege, is_vegan, is_coeliac, has_alcohol, cost, picture";
 
 const TABLE = "items";
 

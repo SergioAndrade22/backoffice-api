@@ -3,6 +3,9 @@ const { getPictureQuery, getQuery, getClient } = require('./dbHandler');
 const express = require('express');
 const app = express();
 
+const cors = require('cors');
+app.use(cors());
+
 const swaggerUI = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -20,6 +23,9 @@ app.get('/menu', (req, res) => {
     client.connect();
     client.query(getQuery(), (error, result) => {
         if (result.rows) {
+            result.rows.forEach(item => {
+                item['picture'] = item['picture'] ? `https://familysize-servicio-web.herokuapp.com/menu/${item.id}/picture` : null;
+            })
             res.status(200).json({
                 ok: true,
                 menu: result.rows,
@@ -41,6 +47,7 @@ app.get('/menu/:id', (req, res) => {
     client.query(getQuery(req.params.id), (error, result) => {
         if (!error){
             if (result.rows.length > 0){
+                result.rows[0]['picture'] = result.rows[0]['picture'] ? `https://familysize-servicio-web.herokuapp.com/menu/${req.params.id}/picture` : null;
                 res.status(200).json({
                     ok: true,
                     item: result.rows[0],
@@ -75,6 +82,12 @@ app.get('/menu/:id/picture', (req, res) => {
                         console.error("Failed to write image:", err);
                     });
                     res.end();
+                } 
+                else {
+                    res.status(404).json({
+                        ok: false,
+                        error: "Element has no image"
+                    })
                 }
             }
             else {
